@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyCMIT5lu.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Raleway Bold'), local('Raleway-Bold'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwJYtWqhPAMif.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@-webkit-keyframes resize {
+    from {
+        -webkit-transform: scale(1);
+    }
+
+    to {
+        -webkit-transform: scale(1.5);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    font-family: "Raleway", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 3vh 0;
+}
+
+h1:first-letter {
+    color: yellow;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul > a:nth-child(2n) {
+    color: orange;
+}
+
+ul > a:nth-child(2n+1) {
+    font-size: 2rem;
+}
+
+header {
+    height: 5vh;
+    width: 100vw;
+    text-align: center;
+    padding: 1vh;
+    font-size: 2.4rem;
+    background: black;
+    color: white;
+}
+
+main {
+    min-width: 1024px;
+    padding: 1vh 30vw 5vh 30vw;
+    font-size: 1.6rem;
+    background: -webkit-linear-gradient(to right, #8e9eab, #eef2f3);
+    background: linear-gradient(to right, #cecece, #fff);
+}
+
+main p {
+    letter-spacing: 1px;
+    word-spacing: 10px;
+    line-height: 1.6;
+}
+
+main p:first-line {
+    color: blue;
+    font-style: italic;
+}
+
+main p:nth-of-type(2n) {
+    color: darkred;
+}
+
+main p:nth-of-type(2n+1) {
+    color: darkgreen;
+}
+
+footer {
+    height: 5vh;
+    width: 100vw;
+    text-align: center;
+    font-size: 1.4rem;
+    background: black;
+    color: white;
+    padding: 1.5vh 0;
+}
+
+
+nav {
+    position: fixed;
+    top: 6vh;
+    left: 1vw;
+    padding: 1vh 1vw 1vh 2vw;
+    min-width: 20vw;
+    font-size: 1.6rem;
+}
+
+
+nav a {
+    color: black;
+    text-decoration: none;
+    line-height: 1.8;
+}
+
+nav a:hover {
+    color: darkred;
+    font-weight: 700;
+}
+
+
+#arrow-up {
+    position: fixed;
+    right: 4vw;
+    bottom: 8vh;
+    -webkit-animation: resize 1s infinite linear;
+}
+
+#arrow-down {
+    position: fixed;
+    right: 4vw;
+    top: 8vh;
+    -webkit-animation: resize 1s infinite linear;
+}
