@@ -1,0 +1,25 @@
+{
+  "name": "VladimirDobrik-Tasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://vladimirDobrik:341277qwerty@github.com/vladimirDobrik/VladimirDobrik-Tasks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vladimirDobrik/VladimirDobrik-Tasks/issues"
+  },
+  "homepage": "https://github.com/vladimirDobrik/VladimirDobrik-Tasks#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1",
+    "sass": "^1.14.2"
+  }
+}
