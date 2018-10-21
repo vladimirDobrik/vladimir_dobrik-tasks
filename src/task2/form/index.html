@@ -16,16 +16,16 @@
           <form class="form-action" action="#" method="post">
               <p class="form"><b>Form Action <mark>_mc4wp_action</mark></b></p>
               <p class="form">This field will allow your visitors to choose whether they would like to subscribe or unsubscribe</p>
-              <label for="field">Field Label</label><input type="text" id="field">
-              <label for="choise">Choice Type</label><select id="choise">
+              <label for="field">Field Label</label><input type="text" id="field" value="Form Action">
+              <label for="choise">Choice Type</label><select id="choise" size="1" multiple>
                   <option>Radio Buttons</option>
               </select>
               <label for="choices">Choices</label>
               <fieldset id="choices">
-                  <p><input type="radio" name="radio"><input type="text"><input type="reset"></p>
-                  <p><input type="radio" name="radio"><input type="text"><input type="reset"></p>
+                  <p><input type="radio" name="radio" checked><input type="text" value="Subscribe" disabled><input type="reset"></p>
+                  <p><input type="radio" name="radio"><input type="text" value="Unsubscribe" disabled><input type="reset"></p>
               </fieldset>
-              <p class="form"><input type="checkbox" id="checkbox"><label for="checkbox"></label>Wrap in paragraph tags?</p>
+              <p class="form"><input type="checkbox" id="checkbox" checked><label for="checkbox"></label>Wrap in paragraph tags?</p>
               <input type="submit" value="Add to form">
           </form>
       </main>
