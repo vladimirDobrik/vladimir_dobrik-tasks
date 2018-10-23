@@ -1,0 +1,42 @@
+.contacts-list {
+    &__link {
+        text-decoration: none;
+        color: $activeLink;
+        
+        &:hover {
+            color: $firstMainFontColor;
+        }
+    }
+
+    &__item {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+
+        &:first-child {
+            list-style: none;
+            background: url(../img/svg/phone-solid.svg) no-repeat;
+            height: 15px;
+            padding-left: 30px;
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        &:nth-child(2) {
+            list-style: none;
+            background: url(../img/svg/envelope-regular.svg) no-repeat;
+            height: 15px;
+            padding-left: 30px;
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        &:last-child {
+            list-style: none;
+            background: url(../img/svg/compass-regular.svg) no-repeat;
+            height: 15px;
+            padding-left: 30px;
+            line-height: 1;
+            opacity: 0.5;
+        }
+    }
+}

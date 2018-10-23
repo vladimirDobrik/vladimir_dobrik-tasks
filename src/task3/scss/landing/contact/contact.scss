@@ -1,0 +1,26 @@
+.landing__contact {
+    display: flex;
+    flex-direction: row;
+}
+
+.contact {
+    &__form {
+        flex: 2;
+        background-color: $secondMainColor;
+    }
+
+    &__img {
+        flex: 1;
+    }
+
+    &__info {
+        flex: 1;
+        background-color: $fourthMainColor;
+    }
+}
+
+@import "./contact-form";
+@import "./contact-img.scss";
+@import "./contact-info";
+@import "./contact-list";
+@import "./media";
