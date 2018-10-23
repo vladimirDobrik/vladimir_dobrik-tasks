@@ -1,0 +1,8 @@
+.about-img {
+    &__item {
+        background-image: url(../img/about-img.jpg);
+        background-size: cover;
+        background-position: center;
+        min-height: 100%;
+    }
+}

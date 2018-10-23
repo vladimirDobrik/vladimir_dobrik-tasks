@@ -1,0 +1,11 @@
+@media screen and (max-width: 800px) {
+    .landing__about {
+        flex-direction: column;
+    }
+
+    .about-img {
+        &__item {
+            min-height: 350px;
+        }
+    }
+}

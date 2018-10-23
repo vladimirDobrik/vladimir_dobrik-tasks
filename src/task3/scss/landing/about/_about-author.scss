@@ -1,0 +1,23 @@
+.about-author {
+    &__content {
+        padding: 30px 20px;
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    &__item {
+        line-height: 1.5;
+
+        &:first-child {
+            margin-bottom: 10px;
+        }
+
+        &:nth-child(2) {
+            color: $firstMainColor;
+        }
+
+        &:not(:first-child) {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+    }
+}
