@@ -1,0 +1,18 @@
+.landing__education {
+    @extend .landing__experience;
+}
+
+.education {
+    &__img {
+        flex: 1;
+    }
+
+    &__list {
+        flex: 1;
+        background-color: $firstMainColor;
+    }
+}
+
+@import "./education-img";
+@import "./education-list";
+@import "./media";
