@@ -1,0 +1,11 @@
+@media screen and (max-width: 750px) {
+    .landing__experience {
+        flex-direction: column;
+    }
+
+    .experience-img {
+        &__item {
+            min-height: 350px;
+        }
+    }
+}

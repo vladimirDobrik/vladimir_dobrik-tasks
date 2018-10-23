@@ -1,0 +1,7 @@
+.experience-img {
+    &__item {
+        background-image: url(../img/experience-img.jpg);
+        background-size: cover;
+        min-height: 100%;
+    }
+}
