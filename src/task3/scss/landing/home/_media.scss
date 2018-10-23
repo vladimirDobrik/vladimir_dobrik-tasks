@@ -1,0 +1,43 @@
+@media screen and (max-width: 800px) {
+    .landing__home {
+        flex-direction: column;
+    }
+
+    .home-img {
+        &__item {
+            min-height: 400px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home {
+        &__content {
+            padding-top: 20px;
+        }
+
+        &__item {
+            &:last-child {
+                margin-top: 50px;
+            }
+        }
+    }
+
+    .home__header {
+        height: 100%;
+    }
+
+    .navbar {
+        &__content {
+            flex-direction: column;
+            padding: 30px 20px;
+        }
+
+        &__link {
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 2;
+            letter-spacing: 2px;
+        }
+    }
+}

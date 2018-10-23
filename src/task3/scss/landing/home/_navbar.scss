@@ -1,0 +1,20 @@
+.navbar {
+    &__content {
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    &__link {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $headerForegroundColor;
+        line-height: 2;
+        text-align: center;
+
+        &:hover {
+            color: $activeLink;
+        }
+    }
+}
