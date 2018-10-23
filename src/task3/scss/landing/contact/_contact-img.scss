@@ -1,0 +1,8 @@
+.contact-img {
+    &__item {
+        background-image: url(../img/contact-img.jpg);
+        background-size: cover;
+        background-position: center;
+        min-height: 100%;
+    }
+}
