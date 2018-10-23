@@ -1,0 +1,33 @@
+.devider {
+    &__content {
+        background: linear-gradient(rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)), url(../img/quotes-bg.jpg);
+        background-size: cover;
+        background-position: center;
+        min-height: 220px;
+        padding: 30px 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.9;
+        color: $firstMainFontColor;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    &__item {
+        &:first-child {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        &:nth-child(2) {
+            margin-bottom: 30px;
+        }
+
+        &:last-child {
+            opacity: 0.5;
+        }
+    }
+}
