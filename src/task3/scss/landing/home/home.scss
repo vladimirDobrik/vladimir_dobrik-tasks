@@ -1,0 +1,21 @@
+.landing__home {
+    display: flex;
+    flex-direction: row-reverse;   
+}
+
+.home {
+    &__header {
+        flex: 1;
+        background: $headerBackgroundColor;
+        color: $headerForegroundColor;
+    }
+
+    &__img{
+        flex: 1;
+    }
+}
+
+@import "./header.scss";
+@import "./navbar.scss";
+@import "./home-img.scss";
+@import "./media";
