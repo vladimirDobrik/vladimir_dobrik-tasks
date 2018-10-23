@@ -1,0 +1,7 @@
+.education-img {
+    &__item {
+        background-image: url(../img/education-img.jpg);
+        background-size: cover;
+        min-height: 100%;
+    }
+}

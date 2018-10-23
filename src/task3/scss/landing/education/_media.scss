@@ -1,0 +1,11 @@
+@media screen and (max-width: 750px) {
+    .landing__education {
+        flex-direction: column-reverse;
+    }
+
+    .education-img {
+        &__item {
+            min-height: 350px;
+        }
+    }
+}
