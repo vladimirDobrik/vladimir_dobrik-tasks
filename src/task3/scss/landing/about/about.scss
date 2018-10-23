@@ -1,0 +1,25 @@
+.landing__about {
+    background-color: $firstMainColor;
+    display: flex;
+    flex-direction: row;
+}
+
+.about {
+    &__author {
+        background: $thirdMainColor;
+        flex: 2;
+    }
+
+    &__img {
+        flex: 1;
+    }
+
+    &__skills {
+        flex: 1;
+    }
+}
+
+@import "./about-author";
+@import "./about-img";
+@import "./skills-stats";
+@import "./media";
