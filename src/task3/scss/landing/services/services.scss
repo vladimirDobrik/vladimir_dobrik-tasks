@@ -1,0 +1,53 @@
+.landing__services {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.services {
+    &__content {
+        max-width: calc(25% - 40px);
+        padding: 20px 20px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        min-height: 220px;
+
+        &:first-child {
+            background-color: $firstMainColor;
+            color: $firstMainFontColor;
+        }
+
+        &:nth-child(2) {
+            background-color: $secondMainColor;
+            color: $firstMainFontColor;
+        }
+
+        &:nth-child(3) {
+            background-color: $fourthMainColor;
+            color: $firstMainFontColor;
+        }
+
+        &:nth-child(4) {
+            background-color: $thirdMainColor;
+            color: $secondMainFontColor;
+        }
+    }
+
+    &__item {
+        margin-bottom: 10px;
+
+        &:first-child {
+            font-size: 2.5rem;
+        }
+
+        &:last-child {
+            text-align: center;
+            text-indent: 2rem;
+            line-height: 1.3;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@import "./media";

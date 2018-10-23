@@ -1,0 +1,27 @@
+@media screen and (max-width: 710px) {
+    .services {
+        &__content {
+            max-width: calc(50% - 40px);
+            min-height: 150px;
+        }
+    }
+}
+
+@media screen and (max-width: 355px) {
+    .services {
+        &__content {
+            max-width: calc(100% - 40px);
+            min-height: 100px;
+
+        }
+    }
+
+    .landing-exp-list {
+        ul {
+            display: flex;
+            min-height: 150px;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+    }
+}

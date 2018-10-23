@@ -1,0 +1,19 @@
+.landing__experience {
+    display: flex;
+    flex-direction: row;
+}
+
+.experience {
+    &__img {
+        flex: 1;
+    }
+
+    &__list {
+        flex: 1;
+        background-color: $secondMainColor;
+    }
+}
+
+@import "./experience-img";
+@import "./experience-list";
+@import "./media";
