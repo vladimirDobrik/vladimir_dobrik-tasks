@@ -190,6 +190,11 @@ h6 {
     font-weight: 400
 }
 
+.landing__content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .landing__home {
     display: flex;
     flex-direction: row-reverse
