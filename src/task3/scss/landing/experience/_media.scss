@@ -9,3 +9,12 @@
         }
     }
 }
+
+@media screen and (max-width: 355px) {
+    .experience__list ul {
+        display: flex;
+        min-height: 180px;
+        flex-direction: column;
+        justify-content: space-around
+    }
+}
