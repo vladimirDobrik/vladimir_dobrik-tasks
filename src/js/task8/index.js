@@ -5,5 +5,5 @@ module.exports = getLastTenDigits = (num) => {
         sum += Math.pow(i, i);   
     }
     
-    return Number(String(sum).substring(String(sum).length - 10));
+    return +(String(sum).substring(String(sum).length - 10));
 };
