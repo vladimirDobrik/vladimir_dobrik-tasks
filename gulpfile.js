@@ -52,4 +52,9 @@ gulp.task('task8', () => {
         .pipe(mocha({reporter: 'nyan'}))
 });
 
+gulp.task('task10', () => {
+    gulp.src('./src/js/task10/test.js', {read: false})
+        .pipe(mocha({reporter: 'nyan'}))
+});
+
 gulp.task('default', ['task8']);
