@@ -1,15 +1,20 @@
 module.exports = getSumFib = (num) => {
-    
-    let sum = 0;
+
+    let temp = [];
 
     const getFib = (num) => {
-        if(num < 2) return num;
+        if (num < 2) return num;
         else return getFib(num - 1) + getFib(num - 2);
     };
 
-    for (let i = 0; i <= num; i++) {
-        sum += getFib(i);     
-    };
+    let i = 2;
+    while (temp.length < num) {
+        if (getFib(i) % 2 === 0) {
+            temp.push(getFib(i));
+        }
 
-    return sum;
+        i++;
+    }
+
+    return temp.reduce((acc, cur) => acc + cur);
 }
