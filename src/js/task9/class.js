@@ -1,46 +1,51 @@
 class Vehicle {
-    //Конструктор
-    constructor(){
+
+    constructor() {
         this._speed = 0;
     }
-    //Методы
+
     getSpeed() {
         return this._speed;
     }
 
     move(moveSpeed) {
-        return this._speed = moveSpeed;
+        return this._speed += moveSpeed;
     }
 
     stop() {
         return this._speed = 0;
     }
+
+    vehicleHorn() {
+        alert('beep beep!');
+    }
 }
 
-//Наследуем методы Vehicle
 class CargoVehicle extends Vehicle {
-    //Конструктор
+
     constructor(loadCapacity) {
-        //Конструктор родителя
         super();
         this._loadCapacity = loadCapacity;
         this._countOfGoods = 0;
     }
 
-    //Методы
     loadGoods(goods) {
         if (goods > this._loadCapacity) {
             throw new Error("Превышена грузоподъемность = " + this._loadCapacity);
         }
-    
+
         this._countOfGoods = goods;
+    }
+
+    vehicleHorn() {
+        super.vehicleHorn();
+        alert("BEEP BEEP I'M JEEP!");
     }
 
     get countOfGoods() {
         return this._countOfGoods;
     }
 }
-
 
 class PassengerVehicle extends Vehicle {
     constructor() {
@@ -57,7 +62,11 @@ class PassengerVehicle extends Vehicle {
         if (passenger > this._seatCapacity) {
             throw new Error("Превышено кол-во мест для пассажиров = " + this._seatCapacity);
         }
-        
+
         this._countOfPassenger = passenger;
+    }
+
+    vehicleHorn() {
+        super.vehicleHorn();
     }
 }

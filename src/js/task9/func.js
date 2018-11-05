@@ -7,11 +7,15 @@ function Vehicle() {
     }
 
     this.move = function (moveSpeed) {
-        return speed = moveSpeed;
+        return speed += moveSpeed;
     }
 
     this.stop = function () {
         return speed = 0;
+    }
+
+    this.vehicleHorn = function () {
+        alert('beep beep!');
     }
 }
 
@@ -31,6 +35,12 @@ function PassengerVehicle(seatCapacity) {
 
         countOfPassenger = passenger;
     }
+
+    var parentHorn = this.vehicleHorn;
+    this.vehicleHorn = function () {
+        parentHorn.call(this);
+        alert("BEEP BEEP I'M JEEP");
+    }
 }
 
 function CargoVehicle(loadCapacity) {
@@ -49,5 +59,9 @@ function CargoVehicle(loadCapacity) {
         }
 
         countOfGoods = goods;
+    }
+
+    this.vehicleHorn = function () {
+        parentHorn.call(this);
     }
 }
