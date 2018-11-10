@@ -37,6 +37,7 @@ function PassengerVehicle(seatCapacity) {
     }
 
     var parentHorn = this.vehicleHorn;
+
     this.vehicleHorn = function () {
         parentHorn.call(this);
         alert("BEEP BEEP I'M JEEP");
