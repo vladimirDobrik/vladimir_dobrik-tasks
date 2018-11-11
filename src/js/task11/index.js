@@ -1,6 +1,8 @@
 (function () {
     window.addEventListener('load', function () {
+
         var btn = document.createElement('input');
+
         btn.setAttribute('type', 'button');
         btn.setAttribute('value', 'Open Calendar');
         btn.setAttribute('id', 'run-btn');
@@ -24,6 +26,7 @@
         document.querySelector('#run-btn').addEventListener('click', function () {
 
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
+
             CustomCalendarProto.createdCallback = function () {
                 this.innerHTML = '<table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr><tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr></thead><tbody></tbody></table>';
             };
@@ -66,26 +69,36 @@
                 var month = month || new Date().getMonth();
                 var lastDayOfMonth = new Date(year, month + 1, 0).getDate();
                 var curDate = new Date(year, month, lastDayOfMonth);
-                var firstDayOfWeekOfMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1).getDay();
-                var innerTBody = ' ';
+                var firstDayOfWeekOfCurMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1).getDay();
+                var innerTBody = '';
 
-                if (firstDayOfWeekOfMonth !== 0) {
-                    for (var i = 1; i < firstDayOfWeekOfMonth; i++) {
-                        innerTBody += '<td></td>';
+                if (firstDayOfWeekOfCurMonth !== 0) {
+                    for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
+                        var dayOfPreMonth = new Date(year, month, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
+                        innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
                     }
                 } else {
-                    for (var i = 0; i < 6; i++) {
-                        innerTBody += '<td></td>';
+                    for (var i = 5; i >= 0; i--) {
+                        var preDate = new Date(year, month, (firstDayOfWeekOfCurMonth - i));
+                        var dayOfPreMonth = preDate.getDate();
+                        var dayOfWeekOfPreMonth = preDate.getDay();
+
+                        if (dayOfWeekOfPreMonth > 5 || dayOfWeekOfPreMonth === 0) {
+                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
+                        } else {
+                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
+                        }
                     }
                 }
 
-                for (var i = 1; i <= lastDayOfMonth; i++) {
+                for (var day = 1; day <= lastDayOfMonth; day++) {
+                    var dayOfWeek = new Date(curDate.getFullYear(), curDate.getMonth(), day).getDay();
 
-                    new Date(curDate.getFullYear(), curDate.getMonth(), i).getDay() > 0 &&
-                        new Date(curDate.getFullYear(), curDate.getMonth(), i).getDay() < 6 ?
-                        innerTBody += '<td>' + i + '</td>' : innerTBody += '<td style="color:red;">' + i + '</td>';
+                    dayOfWeek > 0 && dayOfWeek < 6 ?
+                        innerTBody += '<td style="color:rgb(0, 0, 0); padding: 10px;">' + day + '</td>' :
+                        innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
 
-                    if (new Date(curDate.getFullYear(), curDate.getMonth(), i).getDay() === 0) {
+                    if (dayOfWeek === 0) {
                         innerTBody += '<tr>';
                     }
                 }
