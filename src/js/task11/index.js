@@ -28,7 +28,9 @@
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
 
             CustomCalendarProto.createdCallback = function () {
-                this.innerHTML = '<table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr><tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr></thead><tbody></tbody></table>';
+                this.innerHTML = '<style>.today{border: 1px solid red;}</style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
+                <tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr>\
+                </thead><tbody></tbody></table>';
             };
 
             if (!CustomCalendar) {
@@ -63,23 +65,28 @@
             document.querySelector('table thead tr:last-child td:nth-of-type(6)').style.cssText = "\
             color: red;";
 
-            (function CustomCalendar(year, month) {
+            (function CustomCalendar(year, month, day) {
 
-                var year = year || new Date().getFullYear();
-                var month = month || new Date().getMonth();
-                var lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-                var curDate = new Date(year, month, lastDayOfMonth);
+                var curYear = year || new Date().getFullYear();
+                var curMonth = month || new Date().getMonth();
+                var curDay = day || new Date().getDate();
+                var lastDayOfMonth = new Date(curYear, curMonth + 1, 0).getDate();
+                var curDate = new Date(curYear, curMonth, curDay);
                 var firstDayOfWeekOfCurMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1).getDay();
                 var innerTBody = '';
 
+                console.log(curYear);
+                console.log(curMonth);
+                console.log(curDay);
+
                 if (firstDayOfWeekOfCurMonth !== 0) {
                     for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
-                        var dayOfPreMonth = new Date(year, month, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
+                        var dayOfPreMonth = new Date(curYear, curMonth, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
                         innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
                     }
                 } else {
                     for (var i = 5; i >= 0; i--) {
-                        var preDate = new Date(year, month, (firstDayOfWeekOfCurMonth - i));
+                        var preDate = new Date(curYear, curMonth, (firstDayOfWeekOfCurMonth - i));
                         var dayOfPreMonth = preDate.getDate();
                         var dayOfWeekOfPreMonth = preDate.getDay();
 
@@ -94,8 +101,15 @@
                 for (var day = 1; day <= lastDayOfMonth; day++) {
                     var dayOfWeek = new Date(curDate.getFullYear(), curDate.getMonth(), day).getDay();
 
+                    if (curYear === new Date().getFullYear() &&
+                        curMonth === new Date().getMonth() &&
+                        day === new Date().getDate()) {
+                        innerTBody += '<td style="border-radius: 50%; background: #fff;">' + day + '</td>';
+                        continue;
+                    }
+
                     dayOfWeek > 0 && dayOfWeek < 6 ?
-                        innerTBody += '<td style="color:rgb(0, 0, 0); padding: 10px;">' + day + '</td>' :
+                        innerTBody += '<td style="padding: 10px;">' + day + '</td>' :
                         innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
 
                     if (dayOfWeek === 0) {
@@ -107,9 +121,12 @@
                 var tBody = document.querySelector('tbody');
 
                 tBody.innerHTML = innerTBody;
-                tHeader.innerHTML = (curDate.getMonth() + 1) + ' - ' + curDate.getFullYear();
-                tHeader.year = curDate.getFullYear();
-                tHeader.months = curDate.getMonth();
+                tHeader.innerHTML = curDate.toLocaleString('en', {
+                    month: 'long',
+                    year: 'numeric'
+                });
+                tHeader.year = curYear;
+                tHeader.months = curMonth;
 
                 var prevMonth = document.querySelector('thead tr:nth-of-type(1) td:nth-of-type(1)');
                 var nextMonth = document.querySelector('thead tr:nth-of-type(1) td:nth-of-type(3)');
@@ -119,7 +136,8 @@
                 nextMonth.innerHTML = '<i class="fas fa-angle-double-right"></i>';
                 close.innerHTML = '<i class="far fa-times-circle"></i>';
 
-                tHeader.style.color = '#fff';
+                tHeader.style.cssText = "\
+                color: #fff;";
 
                 close.onmouseover = function (e) {
                     e = e || event;
@@ -171,7 +189,9 @@
                 close.addEventListener('click', function (e) {
                     e = e || event;
                     document.querySelector('custom-calendar').style.display = 'none';
+
                     var btn = document.createElement('input');
+
                     btn.setAttribute('type', 'button');
                     btn.setAttribute('value', 'Open Calendar');
                     btn.style.cssText = "\
@@ -190,7 +210,7 @@
                         cursor: pointer;";
 
                     document.body.appendChild(btn);
-                    e.stopImmediatePropagation();
+
                     btn.addEventListener('click', function (e) {
                         e = e || event;
                         CustomCalendar();
@@ -198,6 +218,8 @@
                         btn.remove();
                         e.stopImmediatePropagation();
                     })
+
+                    e.stopImmediatePropagation();
                 })
             })();
 
