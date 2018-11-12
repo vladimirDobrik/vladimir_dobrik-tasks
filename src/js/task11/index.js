@@ -28,7 +28,7 @@
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
 
             CustomCalendarProto.createdCallback = function () {
-                this.innerHTML = '<style>.today{border: 1px solid red;}</style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
+                this.innerHTML = '<style>.current-day{border-radius: 50%; background: #fff;}</style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
                 <tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr>\
                 </thead><tbody></tbody></table>';
             };
@@ -101,19 +101,32 @@
                 for (var day = 1; day <= lastDayOfMonth; day++) {
                     var dayOfWeek = new Date(curDate.getFullYear(), curDate.getMonth(), day).getDay();
 
-                    if (curYear === new Date().getFullYear() &&
-                        curMonth === new Date().getMonth() &&
-                        day === new Date().getDate()) {
-                        innerTBody += '<td style="border-radius: 50%; background: #fff;">' + day + '</td>';
-                        continue;
-                    }
+                    if (lastDayOfMonth) {
+                        if (curYear === new Date().getFullYear() &&
+                            curMonth === new Date().getMonth() &&
+                            day === new Date().getDate()) {
 
-                    dayOfWeek > 0 && dayOfWeek < 6 ?
-                        innerTBody += '<td style="padding: 10px;">' + day + '</td>' :
-                        innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
+                            if (dayOfWeek > 0 && dayOfWeek < 6) {
+                                innerTBody += '<td class="current-day">' + day + '</td>';
+                            } else {
+                                innerTBody += '<td class="current-day" style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
+                            }
 
-                    if (dayOfWeek === 0) {
-                        innerTBody += '<tr>';
+                            if (dayOfWeek === 0) {
+                                innerTBody += '<tr>';
+                            }
+                            continue;
+                        }
+
+                        if (dayOfWeek > 0 && dayOfWeek < 6) {
+                            innerTBody += '<td style="padding: 10px;">' + day + '</td>';
+                        } else {
+                            innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
+                        }
+
+                        if (dayOfWeek === 0) {
+                            innerTBody += '<tr>';
+                        }
                     }
                 }
 
