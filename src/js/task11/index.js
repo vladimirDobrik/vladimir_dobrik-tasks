@@ -32,7 +32,7 @@
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
 
             CustomCalendarProto.createdCallback = function () {
-                this.innerHTML = '<style>.current-day{border-radius: 50%; background: #fff;}</style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
+                this.innerHTML = '<style></style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
                 <tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr>\
                 </thead><tbody></tbody></table>';
             };
@@ -74,14 +74,11 @@
                 var curYear = year || new Date().getFullYear();
                 var curMonth = month || new Date().getMonth();
                 var curDay = day || new Date().getDate();
-                var lastDayOfMonth = new Date(curYear, curMonth + 1, 0).getDate();
                 var curDate = new Date(curYear, curMonth, curDay);
-                var firstDayOfWeekOfCurMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1).getDay();
+                var lastDayOfMonth = new Date(curYear, curMonth + 1, 0).getDate();
+                var firstDayOfWeekOfCurMonth = new Date(curYear, curMonth, 1).getDay();
+                var lastDayOfWeekOfCurMonth = new Date(curYear, curMonth + 1, 0).getDay();
                 var innerTBody = '';
-
-                console.log(curYear);
-                console.log(curMonth);
-                console.log(curDay);
 
                 if (firstDayOfWeekOfCurMonth !== 0) {
                     for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
@@ -103,7 +100,7 @@
                 }
 
                 for (var day = 1; day <= lastDayOfMonth; day++) {
-                    var dayOfWeek = new Date(curDate.getFullYear(), curDate.getMonth(), day).getDay();
+                    var dayOfWeek = new Date(curYear, curMonth, day).getDay();
 
                     if (lastDayOfMonth) {
                         if (curYear === new Date().getFullYear() &&
@@ -111,9 +108,9 @@
                             day === new Date().getDate()) {
 
                             if (dayOfWeek > 0 && dayOfWeek < 6) {
-                                innerTBody += '<td class="current-day">' + day + '</td>';
+                                innerTBody += '<td style="border-radius: 50%; background: #fff;">' + day + '</td>';
                             } else {
-                                innerTBody += '<td class="current-day" style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
+                                innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px; border-radius: 50%; background: #fff;">' + day + '</td>';
                             }
 
                             if (dayOfWeek === 0) {
@@ -130,6 +127,20 @@
 
                         if (dayOfWeek === 0) {
                             innerTBody += '<tr>';
+                        }
+                    }
+                }
+
+                if (lastDayOfWeekOfCurMonth !== 0) {
+                    for (var dayOfWeek = lastDayOfWeekOfCurMonth + 1, day = 1; dayOfWeek <= 7; dayOfWeek++, day++) {
+                        var nextDate = new Date(curYear, curMonth, lastDayOfMonth + day);
+                        var dayOfNextMonth = nextDate.getDate();
+                        var dayOfWeekOfNextMonth = nextDate.getDay();
+
+                        if (dayOfWeekOfNextMonth > 5 || dayOfWeekOfNextMonth === 0) {
+                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">' + dayOfNextMonth + '</td>';
+                        } else {
+                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfNextMonth + '</td>';
                         }
                     }
                 }
