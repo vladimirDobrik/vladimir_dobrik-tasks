@@ -2,18 +2,22 @@
     window.addEventListener('load', function () {
 
         var btn = document.createElement('input');
-
+        var today = new Date().toLocaleString('en', {
+            day: 'numeric',
+            weekday: 'long'
+        });
         btn.setAttribute('type', 'button');
-        btn.setAttribute('value', 'Open Calendar');
+        btn.setAttribute('value', today);
         btn.setAttribute('id', 'run-btn');
         btn.style.cssText = "\
             text-transform: uppercase;\
             display: inline-block;\
-            padding: 12px 10px;\
+            padding: 6px 10px;\
             text-align: center;\
             text-decoration: none;\
             border: 2px solid #96deda;\
             font-weight: 800;\
+            font-size: 16px;\
             color: #000;\
             border-radius: 20px;\
             width: 150px;\
@@ -206,15 +210,16 @@
                     var btn = document.createElement('input');
 
                     btn.setAttribute('type', 'button');
-                    btn.setAttribute('value', 'Open Calendar');
+                    btn.setAttribute('value', today);
                     btn.style.cssText = "\
                         text-transform: uppercase;\
                         display: inline-block;\
-                        padding: 12px 10px;\
+                        padding: 6px 10px;\
                         text-align: center;\
                         text-decoration: none;\
                         border: 2px solid #96deda;\
                         font-weight: 800;\
+                        font-size: 16px;\
                         color: #000;\
                         border-radius: 20px;\
                         width: 150px;\
