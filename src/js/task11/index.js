@@ -32,7 +32,8 @@
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
 
             CustomCalendarProto.createdCallback = function () {
-                this.innerHTML = '<style></style><table><thead><tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
+                this.innerHTML = '<table><thead>\
+                <tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
                 <tr><td colspan="7"></td></tr>\
                 <tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr>\
                 </thead><tbody></tbody></table>';
@@ -87,18 +88,21 @@
                 if (firstDayOfWeekOfCurMonth !== 0) {
                     for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
                         var dayOfPreMonth = new Date(curYear, curMonth, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
-                        innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
+                        innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">'
+                         + dayOfPreMonth + '</td>';
                     }
                 } else {
-                    for (var i = 5; i >= 0; i--) {
-                        var preDate = new Date(curYear, curMonth, (firstDayOfWeekOfCurMonth - i));
+                    for (var dayOfWeek = 5; dayOfWeek >= 0; dayOfWeek--) {
+                        var preDate = new Date(curYear, curMonth, (firstDayOfWeekOfCurMonth - dayOfWeek));
                         var dayOfPreMonth = preDate.getDate();
                         var dayOfWeekOfPreMonth = preDate.getDay();
 
                         if (dayOfWeekOfPreMonth > 5 || dayOfWeekOfPreMonth === 0) {
-                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
+                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">'
+                             + dayOfPreMonth + '</td>';
                         } else {
-                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfPreMonth + '</td>';
+                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">'
+                             + dayOfPreMonth + '</td>';
                         }
                     }
                 }
@@ -112,9 +116,12 @@
                             day === new Date().getDate()) {
 
                             if (dayOfWeek > 0 && dayOfWeek < 6) {
-                                innerTBody += '<td style="border-radius: 50%; background: #fff;">' + day + '</td>';
+                                innerTBody += '<td style="border-radius: 50%; background: #fff;">'
+                                 + day + '</td>';
                             } else {
-                                innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px; border-radius: 50%; background: #fff;">' + day + '</td>';
+                                innerTBody += 
+                                '<td style="color:rgb(255, 0, 0); padding: 10px; border-radius: 50%; background: #fff;">'
+                                 + day + '</td>';
                             }
 
                             if (dayOfWeek === 0) {
@@ -124,9 +131,11 @@
                         }
 
                         if (dayOfWeek > 0 && dayOfWeek < 6) {
-                            innerTBody += '<td style="padding: 10px;">' + day + '</td>';
+                            innerTBody += '<td style="padding: 10px;">'
+                             + day + '</td>';
                         } else {
-                            innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">' + day + '</td>';
+                            innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px;">'
+                             + day + '</td>';
                         }
 
                         if (dayOfWeek === 0) {
@@ -142,15 +151,16 @@
                         var dayOfWeekOfNextMonth = nextDate.getDay();
 
                         if (dayOfWeekOfNextMonth > 5 || dayOfWeekOfNextMonth === 0) {
-                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">' + dayOfNextMonth + '</td>';
+                            innerTBody += '<td style="color:rgba(255, 0, 0, .3); padding: 10px;">'
+                             + dayOfNextMonth + '</td>';
                         } else {
-                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">' + dayOfNextMonth + '</td>';
+                            innerTBody += '<td style="color:rgba(0, 0, 0, .3); padding: 10px;">'
+                             + dayOfNextMonth + '</td>';
                         }
                     }
                 }
 
                 var input = document.querySelector('table thead tr:nth-of-type(2) td:first-child input');
-
                 var innerInput = new Date().toLocaleString('en', {
                     day: 'numeric',
                     year: 'numeric',
@@ -215,19 +225,19 @@
                 cursor: pointer;";
 
                 prevMonth.onmouseover = function (e) {
-                    event.target.style.color = '#fff';
+                    e.target.style.color = '#fff';
                 }
 
                 prevMonth.onmouseout = function (e) {
-                    event.target.style.color = '#000';
+                    e.target.style.color = '#000';
                 }
 
                 nextMonth.onmouseover = function (e) {
-                    event.target.style.color = '#fff';
+                    e.target.style.color = '#fff';
                 }
 
                 nextMonth.onmouseout = function (e) {
-                    event.target.style.color = '#000';
+                    e.target.style.color = '#000';
                 }
 
                 prevMonth.addEventListener('click', function (e) {
@@ -293,8 +303,13 @@
 
                     function applyMask(data) {
                         return mask.map(function (char) {
-                            if (char !== '_') return char;
-                            if (data.length == 0) return char;
+                            if (char !== '_') {
+                                return char;
+                            }
+                            if (data.length == 0) {
+                                return char;
+                            }
+
                             return data.shift();
                         }).join('')
                     }
@@ -309,7 +324,6 @@
                         var oldEnd = field.selectionEnd;
 
                         field.value = reapplyMask(field.value);
-
                         field.selectionStart = oldStart;
                         field.selectionEnd = oldEnd;
 
@@ -317,9 +331,10 @@
                             var exportDate = String(field.value).split('/').map(function (elem) {
                                 return Number(elem);
                             });
-                            console.log(exportDate);
+
                             CustomCalendar(exportDate[2], exportDate[1] - 1, exportDate[0]);
                         }
+
                         e.stopImmediatePropagation();
                     }
 
