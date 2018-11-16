@@ -1,4 +1,4 @@
-let isSimpleNumber = num => {
+const isSimpleNumber = num => {
 
     let result = true;
 
@@ -12,7 +12,7 @@ let isSimpleNumber = num => {
     return result;
 }
 
-let getPrimeNumbers = num => {
+const getPrimeNumbers = num => {
 
     const result = [];
 
