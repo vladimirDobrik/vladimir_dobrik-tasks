@@ -1,16 +1,16 @@
-const getLastTenDigits = num => {
+const mathPow = num => {
 
-    const mathPow = num => {
+    let result = num;
 
-        let result = num;
-
-        for (let i = 1; i < num; i++) {
-            result *= num;
-            result = result % 1e10;
-        }
-
-        return result;
+    for (let i = 1; i < num; i++) {
+        result *= num;
+        result = result % 1e10;
     }
+
+    return result;
+}
+
+const getLastTenDigits = num => {
 
     let sum = 0;
     let result;

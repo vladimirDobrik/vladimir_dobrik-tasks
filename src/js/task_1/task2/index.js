@@ -17,8 +17,9 @@ const getFirstPrimeNumbers = num => {
     const result = [];
 
     for (let i = 2; result.length < num; i++) {
-        if (isSimpleNumber(i))
+        if ( isSimpleNumber(i) ) {
             result.push(i);
+        }
     }
 
     return result;
