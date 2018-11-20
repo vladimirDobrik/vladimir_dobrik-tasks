@@ -13,47 +13,47 @@ const mocha = require('gulp-mocha');
 // );
 
 gulp.task('task1', () => 
-    gulp.src('./src/js/task1/test.js', {read: false})
+    gulp.src('./src/js/task_1/task1/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 );
 
 gulp.task('task2', () => 
-    gulp.src('./src/js/task2/test.js', {read: false})
+    gulp.src('./src/js/task_1/task2/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 );
 
 gulp.task('task3', () => 
-    gulp.src('./src/js/task3/test.js', {read: false})
+    gulp.src('./src/js/task_1/task3/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 );
 
 gulp.task('task4', () => {
-    gulp.src('./src/js/task4/test.js', {read: false})
+    gulp.src('./src/js/task_1/task4/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('task5', () => {
-    gulp.src('./src/js/task5/test.js', {read: false})
+    gulp.src('./src/js/task_1/task5/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('task6', () => {
-    gulp.src('./src/js/task6/test.js', {read: false})
+    gulp.src('./src/js/task_1/task6/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('task7', () => {
-    gulp.src('./src/js/task7/test.js', {read: false})
+    gulp.src('./src/js/task_1/task7/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('task8', () => {
-    gulp.src('./src/js/task8/test.js', {read: false})
+    gulp.src('./src/js/task_1/task8/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('task10', () => {
-    gulp.src('./src/js/task10/test.js', {read: false})
+    gulp.src('./src/js/task_1/task9/test.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
 
