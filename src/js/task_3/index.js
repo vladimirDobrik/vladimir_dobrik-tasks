@@ -1,5 +1,5 @@
 (function () {
-    window.CustomCalendar = function CustomCalendar(year, month, day, containerID) {
+    CustomCalendar = function CustomCalendar(year, month, day, containerID) {
 
         function createDatepickerContainer() {
 
@@ -10,6 +10,7 @@
         }
 
         function createTableContainer() {
+
             var tableContainer = document.createElement('div');
             datepickerContainer.appendChild(tableContainer);
             tableContainer.style.display = 'none';
@@ -35,6 +36,25 @@
             return btn;
         }
 
+        function createTodayBtn() {
+
+            var todayBtn = document.createElement('input');
+            var today = new Date().toLocaleString('en', {
+                day: 'numeric',
+                weekday: 'long',
+                year: 'numeric'
+            });
+
+            todayBtn.setAttribute('type', 'button');
+            todayBtn.setAttribute('value', today);
+            todayBtn.setAttribute('id', 'today-btn');
+            todayBtn.style.cssText = DatepickerTemplates.todayButtontyle;
+
+            document.querySelector('table thead tr:nth-of-type(2) td:first-child').appendChild(todayBtn);
+
+            return todayBtn;
+        }
+
         function initComponentsStyles() {
 
             document.querySelector('table').style.cssText = DatepickerTemplates.tableStyle;
@@ -51,12 +71,23 @@
             var tHeader = document.querySelector('table thead td:nth-of-type(2)');
 
             tHeader.style.cssText = DatepickerTemplates.tableHeaderStyle;
-            close.style.cssText = DatepickerTemplates.closeButton;
-            prevMonth.style.cssText = DatepickerTemplates.previousButton;
-            nextMonth.style.cssText = DatepickerTemplates.nextButton;
+            close.style.cssText = DatepickerTemplates.closeButtonStyle;
+            prevMonth.style.cssText = DatepickerTemplates.previousButtonStyle;
+            nextMonth.style.cssText = DatepickerTemplates.nextButtonStyle;
             prevMonth.innerHTML = '<i class="fas fa-angle-double-left"></i>';
             nextMonth.innerHTML = '<i class="fas fa-angle-double-right"></i>';
             close.innerHTML = '<i class="far fa-times-circle"></i>';
+        }
+
+        function getFormattedDate(year, month, day) {
+
+            var formattedDate = new Date(year, month, day).toLocaleString('en-GB', {
+                day: 'numeric',
+                year: 'numeric',
+                month: 'numeric',
+            });
+
+            return formattedDate;
         }
 
         function initEvents() {
@@ -95,6 +126,7 @@
             prevMonth.addEventListener('click', function (e) {
                 e = e || event;
                 displayingMonth = displayingMonth - 1;
+                dateInput.value = getFormattedDate(displayingYear, displayingMonth, 1);
                 drawCalendar();
                 e.stopImmediatePropagation();
             });
@@ -102,6 +134,7 @@
             nextMonth.addEventListener('click', function (e) {
                 e = e || event;
                 displayingMonth = displayingMonth + 1;
+                dateInput.value = getFormattedDate(displayingYear, displayingMonth, 1);
                 drawCalendar();
                 e.stopImmediatePropagation();
             });
@@ -120,7 +153,7 @@
             });
 
             tbody.addEventListener('mouseover', function (e) {
-                e.target.style.backgroundColor = 'yellow';
+                e.target.style.backgroundColor = '#fff';
             });
 
             tbody.addEventListener('mouseout', function (e) {
@@ -132,29 +165,40 @@
                 var isPreviousMonth = e.target.getAttribute('data-isPrevious');
                 var isNextMonth = e.target.getAttribute('data-isNext');
                 var increment = isPreviousMonth ? -1 : isNextMonth ? 1 : 0;
+
                 displayingMonth = displayingMonth + increment;
                 selectedYear = displayingYear;
                 selectedDay = day;
                 selectedMonth = displayingMonth;
+                dateInput.value = getFormattedDate(selectedYear, selectedMonth, selectedDay);
+
                 drawCalendar();
             });
+
+            todayBtn.onclick = function (e) {
+                selectedYear = new Date().getFullYear();
+                selectedMonth = new Date().getMonth();
+                selectedDay = new Date().getDate();
+                displayingYear = selectedYear;
+                displayingMonth = selectedMonth;
+                dateInput.value = getFormattedDate(selectedYear, selectedMonth, selectedDay);
+
+                drawCalendar();
+            }
         }
 
         function createDateInput() {
 
-            var input = document.querySelector('table thead tr:nth-of-type(2) td:first-child input');
-            var innerInput = new Date().toLocaleString('en', {
-                day: 'numeric',
-                year: 'numeric',
-                month: 'numeric',
-            });
+            var dateInput = document.querySelector('table thead tr:nth-of-type(2) td:first-child input');
+            var innerInput = getFormattedDate(selectedYear, selectedMonth, selectedDay);
 
-            input.setAttribute('type', 'text');
-            input.setAttribute('id', 'search-date');
-            input.setAttribute('data-mask', "__/__/____");
-            input.setAttribute('placeholder', innerInput);
-            input.style.cssText = DatepickerTemplates.dateInputStyle;
-            return input;
+            dateInput.setAttribute('type', 'text');
+            dateInput.setAttribute('id', 'search-date');
+            dateInput.setAttribute('data-mask', "__/__/____");
+            dateInput.setAttribute('value', innerInput);
+            dateInput.style.cssText = DatepickerTemplates.dateInputStyle;
+
+            return dateInput;
         }
 
         function registerComponent() {
@@ -207,10 +251,10 @@
                     day == selectedDay) {
 
                     if (dayOfWeek > 0 && dayOfWeek < 6) {
-                        innerTBody += '<td style="border-radius: 50%; background: #fff;">' +
+                        innerTBody += '<td style="border-radius: 50%;">' +
                             day + '</td>';
                     } else {
-                        innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px; border-radius: 50%; background: #fff;">' +
+                        innerTBody += '<td style="color:rgb(255, 0, 0); padding: 10px; border-radius: 50%;">' +
                             day + '</td>';
                     }
 
@@ -300,7 +344,12 @@
                         return Number(elem);
                     });
 
-                    CustomCalendar(exportDate[2], exportDate[1] - 1, exportDate[0]);
+                    selectedYear = exportDate[2];
+                    selectedMonth = exportDate[1] - 1;
+                    selectedDay = exportDate[0];
+                    displayingYear = selectedYear;
+                    displayingMonth = selectedMonth;
+                    drawCalendar();
                 }
 
                 e.stopImmediatePropagation();
@@ -321,6 +370,7 @@
         registerComponent();
         initComponentsStyles();
         var dateInput = createDateInput();
+        var todayBtn = createTodayBtn();
         initEvents();
         applyDataMask(dateInput);
     }

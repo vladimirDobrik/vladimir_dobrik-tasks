@@ -18,10 +18,27 @@ DatepickerTemplates.runButtonStyle = "\
     font-size: 16px;\
     color: #000;\
     border-radius: 20px;\
-    width: 170px;\
+    width: 190px;\
     outline: none;\
     background-color: transparent;\
     cursor: pointer;";
+
+DatepickerTemplates.todayButtontyle = "\
+    text-transform: uppercase;\
+    display: inline-block;\
+    padding: 6px 10px;\
+    text-align: center;\
+    text-decoration: none;\
+    border: 2px solid #96deda;\
+    font-weight: 800;\
+    font-size: 16px;\
+    color: #000;\
+    border-radius: 20px;\
+    width: 220px;\
+    outline: none;\
+    background-color: #fff;\
+    cursor: pointer;\
+    margin-left: 10px;";
 
 DatepickerTemplates.closeButtonStyle = "\
     cursor: pointer;"
@@ -39,7 +56,8 @@ DatepickerTemplates.tableStyle = "\
     text-align: center;\
     cursor: default;\
     border-radius: 10px;\
-    font-family: sans-serif;";
+    font-family: sans-serif;\
+    user-select: none;";
 
 DatepickerTemplates.tableHeadStyle = "\
     font-size: 30px;\
