@@ -1,11 +1,31 @@
 var DatepickerTemplates = {};
 
 DatepickerTemplates.calendarStructureTemplate =
-    '<table><thead>\
-    <tr><td></td><td colspan="4"></td><td></td><td></td></tr>\
-    <tr><td colspan="7"><input></td></tr>\
-    <tr><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td></tr>\
-    </thead><tbody></tbody></table>';
+    '<table>\
+        <thead>\
+            <tr>\
+                <td></td>\
+                <td colspan="4"></td>\
+                <td></td>\
+                <td></td>\
+            </tr>\
+            <tr>\
+                <td colspan="7">\
+                    <input>\
+                </td>\
+            </tr>\
+            <tr>\
+                <td>Mon</td>\
+                <td>Tue</td>\
+                <td>Wed</td>\
+                <td>Thu</td>\
+                <td>Fri</td>\
+                <td>Sat</td>\
+                <td>Sun</td>\
+            </tr>\
+        </thead>\
+        <tbody></tbody>\
+    </table>';
 
 DatepickerTemplates.runButtonStyle = "\
     text-transform: uppercase;\
@@ -15,10 +35,10 @@ DatepickerTemplates.runButtonStyle = "\
     text-decoration: none;\
     border: 2px solid #96deda;\
     font-weight: 800;\
-    font-size: 16px;\
+    font-size: 14px;\
     color: #000;\
     border-radius: 20px;\
-    width: 190px;\
+    width: 150px;\
     outline: none;\
     background-color: transparent;\
     cursor: pointer;";
@@ -30,15 +50,15 @@ DatepickerTemplates.todayButtontyle = "\
     text-align: center;\
     text-decoration: none;\
     border: 2px solid #96deda;\
-    font-weight: 800;\
-    font-size: 16px;\
+    font-weight: 600;\
+    font-size: 14px;\
     color: #000;\
     border-radius: 20px;\
-    width: 220px;\
+    width: 100px;\
     outline: none;\
     background-color: #fff;\
     cursor: pointer;\
-    margin-left: 10px;";
+    margin-left: 50px;";
 
 DatepickerTemplates.closeButtonStyle = "\
     cursor: pointer;"
@@ -50,7 +70,7 @@ DatepickerTemplates.nextButtonStyle = "\
     cursor: pointer;"
 
 DatepickerTemplates.tableStyle = "\
-    font-size: 20px;\
+    font-size: 15px;\
     background-color: #96deda;\
     padding: 10px;\
     text-align: center;\
@@ -60,7 +80,8 @@ DatepickerTemplates.tableStyle = "\
     user-select: none;";
 
 DatepickerTemplates.tableHeadStyle = "\
-    font-size: 30px;\
+    font-size: 18px;\
+    font-weigth: 600;\
     background-color: #96deda;\
     text-align: center;";
 
@@ -68,7 +89,7 @@ DatepickerTemplates.tableHeaderStyle = "\
     color: #fff;";
 
 DatepickerTemplates.tableBodyStyle = "\
-    font-size: 30px;\
+    font-size: 20px;\
     background-color: #D7FFFE;\
     text-align: center;";
 
@@ -80,11 +101,11 @@ DatepickerTemplates.dateInputStyle = "\
     padding: 6px 15px;\
     text-decoration: none;\
     border: 2px solid #96deda;\
-    font-weight: 800;\
-    font-size: 16px;\
+    font-weight: 600;\
+    font-size: 14px;\
     color: #000;\
     border-radius: 20px;\
-    width: 100px;\
+    width: 80px;\
     outline: none;\
     background-color: #fff;";
 

@@ -20,14 +20,9 @@
 
         function createRunBtn() {
 
-            var btn = document.createElement('input');
-            var today = new Date().toLocaleString('en', {
-                day: 'numeric',
-                weekday: 'long'
-            });
-
-            btn.setAttribute('type', 'button');
-            btn.setAttribute('value', today);
+            var btn = document.createElement('button');
+            
+            btn.innerHTML = 'calendar <i class="far fa-calendar-alt"></i>';
             btn.setAttribute('id', 'run-btn');
             btn.style.cssText = DatepickerTemplates.runButtonStyle;
 
@@ -38,15 +33,8 @@
 
         function createTodayBtn() {
 
-            var todayBtn = document.createElement('input');
-            var today = new Date().toLocaleString('en', {
-                day: 'numeric',
-                weekday: 'long',
-                year: 'numeric'
-            });
-
-            todayBtn.setAttribute('type', 'button');
-            todayBtn.setAttribute('value', today);
+            var todayBtn = document.createElement('button');
+            todayBtn.innerText = 'today';
             todayBtn.setAttribute('id', 'today-btn');
             todayBtn.style.cssText = DatepickerTemplates.todayButtontyle;
 
