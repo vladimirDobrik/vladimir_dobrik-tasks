@@ -1,5 +1,23 @@
 (function () {
-    CustomCalendar = function CustomCalendar(year, month, day, containerID) {
+    CustomCalendar = function CustomCalendar(selectedDate, containerID) {
+
+        var selectedDate = selectedDate || new Date();
+        var selectedYear = selectedDate.getFullYear();
+        var selectedMonth = selectedDate.getMonth() - 1;
+        var selectedDay = selectedDate.getDate();
+        var displayingMonth = selectedMonth;
+        var displayingYear = selectedYear;
+
+        var datepickerContainer = createDatepickerContainer();
+        var tableContainer = createTableContainer();
+        var btn = createRunBtn();
+        var todayBtn = createTodayBtn();
+        var dateInput = createDateInput();
+
+        registerComponent();
+        initComponentsStyles();
+        initEvents();
+        applyDataMask(dateInput);
 
         function createDatepickerContainer() {
 
@@ -14,20 +32,16 @@
             var tableContainer = document.createElement('div');
             datepickerContainer.appendChild(tableContainer);
             tableContainer.style.display = 'none';
+            tableContainer.innerHTML = DatepickerTemplates.calendarStructureTemplate;
 
             return tableContainer;
         }
 
         function createRunBtn() {
 
-            var btn = document.createElement('input');
-            var today = new Date().toLocaleString('en', {
-                day: 'numeric',
-                weekday: 'long'
-            });
-
-            btn.setAttribute('type', 'button');
-            btn.setAttribute('value', today);
+            var btn = document.createElement('button');
+            
+            btn.innerHTML = 'calendar <i class="far fa-calendar-alt"></i>';
             btn.setAttribute('id', 'run-btn');
             btn.style.cssText = DatepickerTemplates.runButtonStyle;
 
@@ -38,15 +52,8 @@
 
         function createTodayBtn() {
 
-            var todayBtn = document.createElement('input');
-            var today = new Date().toLocaleString('en', {
-                day: 'numeric',
-                weekday: 'long',
-                year: 'numeric'
-            });
-
-            todayBtn.setAttribute('type', 'button');
-            todayBtn.setAttribute('value', today);
+            var todayBtn = document.createElement('button');
+            todayBtn.innerText = 'today';
             todayBtn.setAttribute('id', 'today-btn');
             todayBtn.style.cssText = DatepickerTemplates.todayButtontyle;
 
@@ -205,10 +212,6 @@
 
             var CustomCalendarProto = Object.create(HTMLElement.prototype);
 
-            CustomCalendarProto.createdCallback = function () {
-                tableContainer.innerHTML = DatepickerTemplates.calendarStructureTemplate;
-            };
-
             var CustomCalendar = document.registerElement('custom-calendar', {
                 prototype: CustomCalendarProto
             });
@@ -357,21 +360,5 @@
 
             field.addEventListener('keyup', changed);
         }
-
-        var selectedYear = year || new Date().getFullYear();
-        var selectedMonth = month - 1 || new Date().getMonth();
-        var selectedDay = day || new Date().getDate();
-        var displayingMonth = selectedMonth;
-        var displayingYear = selectedYear;
-
-        var datepickerContainer = createDatepickerContainer();
-        var tableContainer = createTableContainer();
-        var btn = createRunBtn();
-        registerComponent();
-        initComponentsStyles();
-        var dateInput = createDateInput();
-        var todayBtn = createTodayBtn();
-        initEvents();
-        applyDataMask(dateInput);
     }
 })();
