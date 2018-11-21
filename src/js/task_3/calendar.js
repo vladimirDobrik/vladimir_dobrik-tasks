@@ -1,13 +1,16 @@
-(function () {
-    CustomCalendar = function CustomCalendar(selectedDate, containerID) {
+class Calendar {
 
-        var selectedDate = selectedDate || new Date();
-        var selectedYear = selectedDate.getFullYear();
-        var selectedMonth = selectedDate.getMonth() - 1;
-        var selectedDay = selectedDate.getDate();
-        var displayingMonth = selectedMonth;
-        var displayingYear = selectedYear;
+    constructor(selectedDate = new Date(), containerID) {
+        this.selectedDate = selectedDate;
+        this.selectedYear = this.selectedDate.getFullYear();
+        this.selectedMonth = this.selectedDate.getMonth() - 1;
+        this.selectedDay = this.selectedDate.getDate();
+        this.containerID = containerID;
+        this.this.displayingYear = this.selectedYear;
+        this.displayingMonth = this.selectedMonth;
+    }
 
+    createTemplate() {
         var datepickerContainer = createDatepickerContainer();
         var tableContainer = createTableContainer();
         var btn = createRunBtn();
@@ -20,15 +23,13 @@
         applyDataMask(dateInput);
 
         function createDatepickerContainer() {
-
             var datepickerContainer = document.createElement('custom-calendar');
-            document.getElementById(containerID).appendChild(datepickerContainer);
+            document.getElementById(this.containerID).appendChild(datepickerContainer);
 
             return datepickerContainer;
         }
 
         function createTableContainer() {
-
             var tableContainer = document.createElement('div');
             datepickerContainer.appendChild(tableContainer);
             tableContainer.style.display = 'none';
@@ -38,9 +39,8 @@
         }
 
         function createRunBtn() {
-
             var btn = document.createElement('button');
-            
+
             btn.innerHTML = 'calendar <i class="far fa-calendar-alt"></i>';
             btn.setAttribute('id', 'run-btn');
             btn.style.cssText = DatepickerTemplates.runButtonStyle;
@@ -51,8 +51,8 @@
         }
 
         function createTodayBtn() {
-
             var todayBtn = document.createElement('button');
+
             todayBtn.innerText = 'today';
             todayBtn.setAttribute('id', 'today-btn');
             todayBtn.style.cssText = DatepickerTemplates.todayButtontyle;
@@ -60,6 +60,38 @@
             document.querySelector('table thead tr:nth-of-type(2) td:first-child').appendChild(todayBtn);
 
             return todayBtn;
+        }
+
+        function createDateInput() {
+
+            var dateInput = document.querySelector('table thead tr:nth-of-type(2) td:first-child input');
+            var innerInput = getFormattedDate(this.selectedYear, this.selectedMonth, this.selectedDay);
+
+            dateInput.setAttribute('type', 'text');
+            dateInput.setAttribute('id', 'search-date');
+            dateInput.setAttribute('data-mask', "__/__/____");
+            dateInput.setAttribute('value', innerInput);
+            dateInput.style.cssText = DatepickerTemplates.dateInputStyle;
+
+            return dateInput;
+        }
+
+        function getFormattedDate(year, month, day) {
+            var formattedDate = new Date(year, month, day).toLocaleString('en-GB', {
+                day: 'numeric',
+                year: 'numeric',
+                month: 'numeric',
+            });
+
+            return formattedDate;
+        }
+
+        function registerComponent() {
+            var CustomCalendarProto = Object.create(HTMLElement.prototype);
+
+            var CustomCalendar = document.registerElement('custom-calendar', {
+                prototype: CustomCalendarProto
+            });
         }
 
         function initComponentsStyles() {
@@ -86,19 +118,7 @@
             close.innerHTML = '<i class="far fa-times-circle"></i>';
         }
 
-        function getFormattedDate(year, month, day) {
-
-            var formattedDate = new Date(year, month, day).toLocaleString('en-GB', {
-                day: 'numeric',
-                year: 'numeric',
-                month: 'numeric',
-            });
-
-            return formattedDate;
-        }
-
         function initEvents() {
-
             var prevMonth = document.querySelector('thead tr:nth-of-type(1) td:nth-of-type(1)');
             var nextMonth = document.querySelector('thead tr:nth-of-type(1) td:nth-of-type(3)');
             var close = document.querySelector('thead tr:nth-of-type(1) td:nth-of-type(4)');
@@ -132,16 +152,16 @@
 
             prevMonth.addEventListener('click', function (e) {
                 e = e || event;
-                displayingMonth = displayingMonth - 1;
-                dateInput.value = getFormattedDate(displayingYear, displayingMonth, 1);
+                this.displayingMonth = this.displayingMonth - 1;
+                dateInput.value = getFormattedDate(this.this.displayingYear, this.displayingMonth, 1);
                 drawCalendar();
                 e.stopImmediatePropagation();
             });
 
             nextMonth.addEventListener('click', function (e) {
                 e = e || event;
-                displayingMonth = displayingMonth + 1;
-                dateInput.value = getFormattedDate(displayingYear, displayingMonth, 1);
+                this.displayingMonth = this.displayingMonth + 1;
+                dateInput.value = getFormattedDate(this.this.displayingYear, this.displayingMonth, 1);
                 drawCalendar();
                 e.stopImmediatePropagation();
             });
@@ -173,66 +193,43 @@
                 var isNextMonth = e.target.getAttribute('data-isNext');
                 var increment = isPreviousMonth ? -1 : isNextMonth ? 1 : 0;
 
-                displayingMonth = displayingMonth + increment;
-                selectedYear = displayingYear;
-                selectedDay = day;
-                selectedMonth = displayingMonth;
-                dateInput.value = getFormattedDate(selectedYear, selectedMonth, selectedDay);
+                this.displayingMonth = this.displayingMonth + increment;
+                this.selectedYear = this.this.displayingYear;
+                this.selectedDay = day;
+                this.selectedMonth = this.displayingMonth;
+                dateInput.value = getFormattedDate(this.selectedYear, this.selectedMonth, this.selectedDay);
 
                 drawCalendar();
             });
 
             todayBtn.onclick = function (e) {
-                selectedYear = new Date().getFullYear();
-                selectedMonth = new Date().getMonth();
-                selectedDay = new Date().getDate();
-                displayingYear = selectedYear;
-                displayingMonth = selectedMonth;
-                dateInput.value = getFormattedDate(selectedYear, selectedMonth, selectedDay);
+                this.selectedYear = new Date().getFullYear();
+                this.selectedMonth = new Date().getMonth();
+                this.selectedDay = new Date().getDate();
+                this.this.displayingYear = this.selectedYear;
+                this.displayingMonth = this.selectedMonth;
+                dateInput.value = getFormattedDate(this.selectedYear, this.selectedMonth, this.selectedDay);
 
                 drawCalendar();
             }
         }
 
-        function createDateInput() {
-
-            var dateInput = document.querySelector('table thead tr:nth-of-type(2) td:first-child input');
-            var innerInput = getFormattedDate(selectedYear, selectedMonth, selectedDay);
-
-            dateInput.setAttribute('type', 'text');
-            dateInput.setAttribute('id', 'search-date');
-            dateInput.setAttribute('data-mask', "__/__/____");
-            dateInput.setAttribute('value', innerInput);
-            dateInput.style.cssText = DatepickerTemplates.dateInputStyle;
-
-            return dateInput;
-        }
-
-        function registerComponent() {
-
-            var CustomCalendarProto = Object.create(HTMLElement.prototype);
-
-            var CustomCalendar = document.registerElement('custom-calendar', {
-                prototype: CustomCalendarProto
-            });
-        }
-
         function drawCalendar() {
 
-            var lastDayOfMonth = new Date(displayingYear, displayingMonth + 1, 0).getDate();
-            var firstDayOfWeekOfCurMonth = new Date(displayingYear, displayingMonth, 1).getDay();
-            var lastDayOfWeekOfCurMonth = new Date(displayingYear, displayingMonth + 1, 0).getDay();
+            var lastDayOfMonth = new Date(this.this.displayingYear, this.displayingMonth + 1, 0).getDate();
+            var firstDayOfWeekOfCurMonth = new Date(this.displayingYear, this.displayingMonth, 1).getDay();
+            var lastDayOfWeekOfCurMonth = new Date(this.displayingYear, this.displayingMonth + 1, 0).getDay();
             var innerTBody = '';
 
             if (firstDayOfWeekOfCurMonth !== 0) {
                 for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
-                    var dayOfPreMonth = new Date(displayingYear, displayingMonth, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
+                    var dayOfPreMonth = new Date(this.displayingYear, this.displayingMonth, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
                     innerTBody += '<td data-isPrevious="true" style="color:rgba(0, 0, 0, .3); padding: 10px;">' +
                         dayOfPreMonth + '</td>';
                 }
             } else {
                 for (var dayOfWeek = 5; dayOfWeek >= 0; dayOfWeek--) {
-                    var preDate = new Date(displayingYear, displayingMonth, (firstDayOfWeekOfCurMonth - dayOfWeek));
+                    var preDate = new Date(this.displayingYear, this.displayingMonth, (firstDayOfWeekOfCurMonth - dayOfWeek));
                     var dayOfPreMonth = preDate.getDate();
                     var dayOfWeekOfPreMonth = preDate.getDay();
 
@@ -247,10 +244,10 @@
             }
 
             for (var day = 1; day <= lastDayOfMonth; day++) {
-                var dayOfWeek = new Date(displayingYear, displayingMonth, day).getDay();
+                var dayOfWeek = new Date(this.displayingYear, this.displayingMonth, day).getDay();
 
-                if (displayingYear == selectedYear &&
-                    displayingMonth == selectedMonth &&
+                if (this.displayingYear == selectedYear &&
+                    this.displayingMonth == selectedMonth &&
                     day == selectedDay) {
 
                     if (dayOfWeek > 0 && dayOfWeek < 6) {
@@ -282,7 +279,7 @@
 
             if (lastDayOfWeekOfCurMonth !== 0) {
                 for (var dayOfWeek = lastDayOfWeekOfCurMonth + 1, day = 1; dayOfWeek <= 7; dayOfWeek++, day++) {
-                    var nextDate = new Date(displayingYear, displayingMonth, lastDayOfMonth + day);
+                    var nextDate = new Date(this.displayingYear, this.displayingMonth, lastDayOfMonth + day);
                     var dayOfNextMonth = nextDate.getDate();
                     var dayOfWeekOfNextMonth = nextDate.getDay();
 
@@ -297,7 +294,7 @@
             }
 
             var tHeader = document.querySelector('table thead td:nth-of-type(2)');
-            var displayingDate = new Date(displayingYear, displayingMonth);
+            var displayingDate = new Date(this.displayingYear, this.displayingMonth);
             tHeader.innerHTML = displayingDate.toLocaleString('en', {
                 month: 'long',
                 year: 'numeric'
@@ -347,11 +344,11 @@
                         return Number(elem);
                     });
 
-                    selectedYear = exportDate[2];
-                    selectedMonth = exportDate[1] - 1;
-                    selectedDay = exportDate[0];
-                    displayingYear = selectedYear;
-                    displayingMonth = selectedMonth;
+                    this.selectedYear = exportDate[2];
+                    this.selectedMonth = exportDate[1] - 1;
+                    this.selectedDay = exportDate[0];
+                    this.displayingYear = this.selectedYear;
+                    this.displayingMonth = this.selectedMonth;
                     drawCalendar();
                 }
 
@@ -361,4 +358,4 @@
             field.addEventListener('keyup', changed);
         }
     }
-})();
+}

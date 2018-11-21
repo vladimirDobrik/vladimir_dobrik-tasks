@@ -14,7 +14,10 @@
 <body>
     <div id="datepickerContainer"></div>
     <script>
-        CustomCalendar(2007, 07, 07,'datepickerContainer');
+        var initDate = new Date(2007, 07, 07);
+        var elemID = document.querySelector('div').getAttribute('id');
+
+        CustomCalendar(initDate, elemID);
     </script>
 </body>
 
