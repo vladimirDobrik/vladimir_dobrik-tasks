@@ -358,6 +358,7 @@ class Calendar {
             field.addEventListener('keyup', changed);
         }
     }
+<<<<<<< HEAD
 }
 
 
@@ -725,3 +726,6 @@ class Calendar {
         }
     }
 })();
+=======
+}
+>>>>>>> bcc3013c32ce37d7989efcf32597eaebe20ef89a
