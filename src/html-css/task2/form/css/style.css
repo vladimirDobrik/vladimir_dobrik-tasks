@@ -158,6 +158,13 @@ fieldset input[type="text"] {
     color: #000;
 }
 
+input,
+option {
+    font-weight: 600;
+}
+
+
+
 .form-action select {
     margin-bottom: 25px;
     width: 150px;
@@ -177,6 +184,10 @@ fieldset {
 
 fieldset p {
     line-height: 30px;
+}
+
+fieldset input[type="text"] {
+    background-color: transparent;
 }
 
 .form-action input[type="radio"] {
