@@ -79,7 +79,7 @@
             todayBtn.id = 'today-btn';
             todayBtn.classList.add('custom-calendar__btn', 'custom-calendar__btn--today');
 
-            document.querySelector('table thead tr:nth-of-type(2) td:first-child').appendChild(todayBtn);
+            document.querySelector('.custom-calendar__datepicker-container').appendChild(todayBtn);
 
             return todayBtn;
         }
