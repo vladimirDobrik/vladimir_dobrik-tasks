@@ -23,7 +23,7 @@ class VehicleTs {
     }
 }
 
-class CargoVehicleTs extends Vehicle {
+class CargoVehicleTs extends VehicleTs {
 
     private _loadCapacity: Number;
     private _countOfGoods: Number;
