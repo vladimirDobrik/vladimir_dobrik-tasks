@@ -193,95 +193,90 @@
             var lastDayOfMonth = new Date(displayingYear, displayingMonth + 1, 0).getDate();
             var firstDayOfWeekOfCurMonth = new Date(displayingYear, displayingMonth, 1).getDay();
             var lastDayOfWeekOfCurMonth = new Date(displayingYear, displayingMonth + 1, 0).getDay();
+            var status = document.querySelector('.control-panel__status');
+            var displayingDate = new Date(displayingYear, displayingMonth);
+            var parent = '.custom-calendar__days';
+            var _ = undefined;
+
+            var classes = {
+                weekday: ['custom-calendar__day'],
+                weekend: ['custom-calendar__day', 'custom-calendar__day--weekend'],
+                weekdayOfOtherMonth: ['custom-calendar__day', 'custom-calendar__day--other-month'],
+                weekendOfOtherMonth: ['custom-calendar__day', 'custom-calendar__day--other-month', 'custom-calendar__day--weekend'],
+                selectedWeekday: ['custom-calendar__day', 'custom-calendar__day--selected'],
+                selectedWeekend: ['custom-calendar__day', 'custom-calendar__day--selected', 'custom-calendar__day--weekend'],
+            };
+
+            var dataAttr = {
+                isPrevious: {
+                    "isPrevious": "true"
+                },
+                isNext: {
+                    "isNext": "true"
+                }
+            };
+
+            status.innerHTML = displayingDate.toLocaleString('en', {
+                month: 'long',
+                year: 'numeric'
+            });
 
             document.querySelector('.custom-calendar__days').innerHTML = '';
 
             if (firstDayOfWeekOfCurMonth !== 0) {
                 for (var dayOfWeek = 1; dayOfWeek < firstDayOfWeekOfCurMonth; dayOfWeek++) {
-                    var dayOfPreMonth = new Date(displayingYear, displayingMonth, (-(firstDayOfWeekOfCurMonth - 1) + dayOfWeek)).getDate();
-                    var classes = [
-                        'custom-calendar__day',
-                        'custom-calendar__day--other-month'
-                    ];
+                    var displayingDayOfWeek = -(firstDayOfWeekOfCurMonth - 1) + dayOfWeek;
+                    var preDate = new Date(displayingYear, displayingMonth, displayingDayOfWeek);
+                    var dayOfPreMonth = preDate.getDate();
 
-                    renderElem('td', classes, '.custom-calendar__days', 'isPrevious');
+                    renderElement('td', parent, classes.weekdayOfOtherMonth, dataAttr.isPrevious, _, dayOfPreMonth);
                 }
             } else {
                 for (var dayOfWeek = 5; dayOfWeek >= 0; dayOfWeek--) {
                     var preDate = new Date(displayingYear, displayingMonth, (firstDayOfWeekOfCurMonth - dayOfWeek));
                     var dayOfPreMonth = preDate.getDate();
                     var dayOfWeekOfPreMonth = preDate.getDay();
+                    var isWeekend = dayOfWeekOfPreMonth > 5 || dayOfWeekOfPreMonth === 0;
 
-                    if (dayOfWeekOfPreMonth > 5 || dayOfWeekOfPreMonth === 0) {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--other-month',
-                            'custom-calendar__day--day-off'
-                        ];
-
-                        renderElem('td', classes, '.custom-calendar__days', 'isPrevious');
+                    if (isWeekend) {
+                        renderElement('td', parent, classes.weekendOfOtherMonth, dataAttr.isPrevious, _, dayOfPreMonth);
                     } else {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--other-month'
-                        ];
-
-                        renderElem('td', classes, '.custom-calendar__days', 'isPrevious');
+                        renderElement('td', parent, classes.weekdayOfOtherMonth, dataAttr.isPrevious, _, dayOfPreMonth);
                     }
                 }
             }
 
             for (var day = 1; day <= lastDayOfMonth; day++) {
+
                 var dayOfWeek = new Date(displayingYear, displayingMonth, day).getDay();
-
-                if (displayingYear == selectedYear &&
+                var isSelected =
+                    displayingYear == selectedYear &&
                     displayingMonth == selectedMonth &&
-                    day == selectedDay) {
+                    day == selectedDay;
 
-                    if (dayOfWeek > 0 && dayOfWeek < 6) {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--selected'
-                        ];
+                var isWeekend = dayOfWeek === 6 || dayOfWeek === 0;
 
-                        renderElem('td', classes, '.custom-calendar__days');
+                if (isSelected) {
+                    if (isWeekend) {
+                        renderElement('td', parent, classes.selectedWeekend, _, _, day);
                     } else {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--selected',
-                            'custom-calendar__day--day-off'
-                        ];
-
-                        renderElem('td', classes, '.custom-calendar__days');
+                        renderElement('td', parent, classes.selectedWeekday, _, _, day);
                     }
 
                     if (dayOfWeek === 0) {
-                        var tr = document.createElement('tr');
-                        var parent = document.querySelector('.custom-calendar__days');
-                        parent.insertBefore(tr, parent.nextElementSibling);
+                        renderElement('tr', parent);
                     }
                     continue;
                 }
 
-                if (dayOfWeek > 0 && dayOfWeek < 6) {
-                    var classes = [
-                        'custom-calendar__day'
-                    ];
-
-                    renderElem('td', classes, '.custom-calendar__days');
+                if (isWeekend) {
+                    renderElement('td', parent, classes.weekend, _, _, day);
                 } else {
-                    var classes = [
-                        'custom-calendar__day',
-                        'custom-calendar__day--day-off'
-                    ];
-
-                    renderElem('td', classes, '.custom-calendar__days');
+                    renderElement('td', parent, classes.weekday, _, _, day);
                 }
 
                 if (dayOfWeek === 0) {
-                    var tr = document.createElement('tr');
-                    var parent = document.querySelector('.custom-calendar__days');
-                    parent.insertBefore(tr, parent.nextElementSibling);
+                    renderElement('tr', parent);
                 }
             }
 
@@ -290,53 +285,39 @@
                     var nextDate = new Date(displayingYear, displayingMonth, lastDayOfMonth + day);
                     var dayOfNextMonth = nextDate.getDate();
                     var dayOfWeekOfNextMonth = nextDate.getDay();
+                    var isWeekend = dayOfWeekOfNextMonth === 6 || dayOfWeekOfNextMonth === 0;
 
-                    if (dayOfWeekOfNextMonth > 5 || dayOfWeekOfNextMonth === 0) {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--other-month',
-                            'custom-calendar__day--day-off'
-                        ];
-
-                        renderElem('td', classes, '.custom-calendar__days', 'isNext');
-
+                    if (isWeekend) {
+                        renderElement('td', parent, classes.weekendOfOtherMonth, dataAttr.isNext, _, dayOfNextMonth);
                     } else {
-                        var classes = [
-                            'custom-calendar__day',
-                            'custom-calendar__day--other-month'
-                        ];
-                        
-                        renderElem('td', classes, '.custom-calendar__days', 'isNext');
+                        renderElement('td', parent, classes.weekdayOfOtherMonth, dataAttr.isNext, _, dayOfNextMonth);
                     }
                 }
             }
 
-            var tHeader = document.querySelector('table thead td:nth-of-type(2)');
-            var displayingDate = new Date(displayingYear, displayingMonth);
-            tHeader.innerHTML = displayingDate.toLocaleString('en', {
-                month: 'long',
-                year: 'numeric'
-            });
-
-            function renderElem(elem, classes, parent, dataAttr) {
-                
+            function renderElement(elem, parent, classes, dataAttr, attr, innerText) {
                 var child = document.createElement(elem);
                 var parent = document.querySelector(parent);
 
-                if(dataAttr) {
-                    if(dataAttr === 'isPrevious') {
-                        child.innerText = dayOfPreMonth;
-                        child.dataset[dataAttr] = "true";
-
-                    } else if(dataAttr === 'isNext') {
-                        child.innerText = dayOfNextMonth;
-                        child.dataset[dataAttr] = "true";
-                    }
-                } else {
-                    child.innerText = day;
+                if (typeof classes !== 'undefined') {
+                    child.classList.add(...classes);
                 }
 
-                child.classList.add(...classes);
+                if (typeof dataAttr !== 'undefined') {
+                    for (var key in dataAttr) {
+                        child.dataset[key] = dataAttr[key];
+                    }
+                }
+
+                if (typeof attr !== 'undefined') {
+                    for (var key in attr) {
+                        child[key] = attr[key];
+                    }
+                }
+
+                if (typeof innerText !== 'undefined') {
+                    child.innerText = innerText;
+                }
 
                 parent.insertBefore(child, parent.nextElementSibling);
             }

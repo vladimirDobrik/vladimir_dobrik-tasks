@@ -66,11 +66,11 @@ DatepickerTemplates.styles = "\
         margin-right: 50px;\
     }\
     .custom-calendar__weekdays {\
-        font-size: 11px;\
+        font-size: 14px;\
         letter-spacing: 2px;\
     }\
     .custom-calendar__weekday:first-letter {\
-        font-size: 14px;\
+        font-size: 15px;\
         font-weight: 600;\
     }\
     .custom-calendar__weekday--dayOff {\
@@ -88,7 +88,7 @@ DatepickerTemplates.styles = "\
     .custom-calendar__day--other-month {\
         opacity: 0.3;\
     }\
-    .custom-calendar__day--day-off {\
+    .custom-calendar__day--weekend {\
         color: red;\
     }\
     .custom-calendar__day--selected {\
@@ -107,17 +107,16 @@ DatepickerTemplates.calendarStructureTemplate =
             </tr>\
             <tr class="custom-calendar__datepicker">\
                 <td class="custom-calendar__datepicker-container" colspan="7">\
-                    <input class="custom-calendar__input">\
                 </td>\
             </tr>\
             <tr class="custom-calendar__weekdays">\
-                <td class="custom-calendar__weekday">Mon</td>\
-                <td class="custom-calendar__weekday">Tue</td>\
-                <td class="custom-calendar__weekday">Wed</td>\
-                <td class="custom-calendar__weekday">Thu</td>\
-                <td class="custom-calendar__weekday">Fri</td>\
-                <td class="custom-calendar__weekday custom-calendar__weekday--dayOff">Sat</td>\
-                <td class="custom-calendar__weekday custom-calendar__weekday--dayOff">Sun</td>\
+                <td class="custom-calendar__weekday"></td>\
+                <td class="custom-calendar__weekday"></td>\
+                <td class="custom-calendar__weekday"></td>\
+                <td class="custom-calendar__weekday"></td>\
+                <td class="custom-calendar__weekday"></td>\
+                <td class="custom-calendar__weekday custom-calendar__weekday--dayOff"></td>\
+                <td class="custom-calendar__weekday custom-calendar__weekday--dayOff"></td>\
             </tr>\
         </thead>\
         <tbody class="custom-calendar__days"></tbody>\
