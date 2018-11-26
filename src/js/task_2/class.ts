@@ -1,40 +1,40 @@
 class VehicleTs {
 
-    private _speed: Number;
+    private _speed: number;
 
     constructor() {
         this._speed = 0;
     }
 
-    public getSpeed(): Number {
+    public getSpeed(): number {
         return this._speed;
     }
 
-    public move(moveSpeed): Number {
+    public move(moveSpeed: number): number {
         return this._speed += moveSpeed;
     }
 
-    public stop(): Number {
+    public stop(): number {
         return this._speed = 0;
     }
 
     public vehicleHorn(): void {
-        alert('beep beep!');
+        console.log('beep beep!');
     }
 }
 
 class CargoVehicleTs extends VehicleTs {
 
-    private _loadCapacity: Number;
-    private _countOfGoods: Number;
+    private _loadCapacity: number;
+    private _countOfGoods: number;
 
-    constructor(loadCapacity: Number) {
+    constructor(loadCapacity: number) {
         super();
         this._loadCapacity = loadCapacity;
         this._countOfGoods = 0;
     }
 
-    public loadGoods(goods: Number): void {
+    public loadGoods(goods: number): void {
         if (goods > this._loadCapacity) {
             throw new Error("Превышена грузоподъемность = " + this._loadCapacity);
         }
@@ -44,10 +44,10 @@ class CargoVehicleTs extends VehicleTs {
 
     public vehicleHorn(): void {
         super.vehicleHorn();
-        alert("BEEP BEEP I'M JEEP!");
+        console.log("BEEP BEEP I'M JEEP!");
     }
 
-    public get countOfGoods(): Number {
+    public get countOfGoods(): number {
         return this._countOfGoods;
     }
 }
