@@ -1,0 +1,8 @@
+<header>
+    <label for="task-description">Task description</label>
+    <input type="text" name="task-description" [(ngModel)]="taskDescription">
+    <button (click)="addTask()">Add</button>
+</header>
+<main>
+    <todo-list-item *ngIf="tasks.length" [tasks]="tasks"></todo-list-item>
+</main>
