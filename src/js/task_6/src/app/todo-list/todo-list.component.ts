@@ -1,23 +1,43 @@
 import { Component } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
+import { ITask } from './todo-list.interfaces';
 
 @Component({
-    moduleId: module.id,
     selector: 'todo-list',
-    styles: [require('./todo-list.component.scss')],
-    template: require('./todo-list.component.html'),
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./todo-list.component.scss'],
+    templateUrl: './todo-list.component.html',
 })
 
 export class ToDoList {
-    taskDescription: string = '';
-    tasks: string[] = [];
+    tasks: ITask[] = [
+        {
+            "description": "Купить хлеб",
+            "status": false
+        },
+        {
+            "description": "Купить молоко",
+            "status": false
+        },
+        {
+            "description": "Купить сахар",
+            "status": false
+        },
+        {
+            "description": "Вымыть посуду",
+            "status": false
+        },
+        {
+            "description": "Убраться в доме",
+            "status": false
+        }
+    ];
 
-    addTask():void {
-        var input = document.querySelector('input');
-
+    addTask(input: HTMLInputElement):void {
         if(input.value.length) {
-            this.tasks.push(this.taskDescription);
+            this.tasks.push({
+                "description": input.value,
+                "status": false
+            });
+
             input.value = '';
         }
     }

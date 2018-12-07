@@ -1,19 +1,28 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
+import { ITask } from '../todo-list/todo-list.interfaces';
 
 @Component({
-    moduleId: module.id,
     selector: 'todo-list-item',
-    styles: [require('./todo-list-item.component.scss')],
-    template: require('./todo-list-item.component.html'),
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./todo-list-item.component.scss'],
+    templateUrl: './todo-list-item.component.html'
 })
 
 export class ToDoListItem {
-    @Input() tasks: string[];
+    @Input() tasks: object[];
 
-    remove(task: string):void {
-        var index = this.tasks.indexOf(task);
+    public remove(index: number):void {
         this.tasks.splice(index, 1);
+    }
+
+    public complete(task: ITask, index: number):void {
+        let removedTask = this.tasks.splice(index, 1);
+
+        task.status = !task.status;
+
+        if(task.status) {
+            this.tasks.unshift(removedTask[0]);
+        } else {
+            this.tasks.push(removedTask[0]);
+        }
     }
 }

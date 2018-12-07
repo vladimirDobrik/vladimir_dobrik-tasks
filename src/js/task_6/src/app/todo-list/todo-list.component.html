@@ -1,8 +1,10 @@
-<header>
-    <label for="task-description">Task description</label>
-    <input type="text" name="task-description" [(ngModel)]="taskDescription">
-    <button (click)="addTask()">Add</button>
+<header class="todo-list__header">
+    <label class="todo-list__label" for="task-description">New Task</label>
+    <input class="todo-list__input" type="text" name="task-description" #inputDescription>
+    <button class="todo-list__btn" (click)="addTask(inputDescription)">
+            <i class="fas fa-plus"></i>
+    </button>
 </header>
-<main>
-    <todo-list-item *ngIf="tasks.length" [tasks]="tasks"></todo-list-item>
+<main class="todo-list__content">
+    <todo-list-item class="tasks-list" *ngIf="tasks.length" [tasks]="tasks"></todo-list-item>
 </main>

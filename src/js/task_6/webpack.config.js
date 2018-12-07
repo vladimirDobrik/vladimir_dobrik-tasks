@@ -16,17 +16,12 @@ module.exports = (env, options) => {
         module: {
             rules: [{
                     test: /\.ts$/,
-                    loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+                    use: ['awesome-typescript-loader', 'angular2-template-loader'],
                     exclude: [/\.(spec|e2e)\.ts$/]
                 },
                 {
                     test: /\.html$/,
-                    loader: 'raw-loader',
-                    exclude: /\.async\.(html|css)$/
-                },
-                {
-                    test: /\.async\.html$/,
-                    loaders: ['file?name=[name].[hash].[ext]', 'extract']
+                    loader: 'html-loader'
                 },
                 {
                     test: /\.scss$/,
