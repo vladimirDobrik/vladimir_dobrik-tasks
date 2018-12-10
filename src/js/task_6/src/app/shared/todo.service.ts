@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
 import { Task } from "./task";
 import { tasks } from "./data";
+
+@Injectable()
 
 export class ToDoService {
     tasks: Task[] = tasks;

@@ -1,11 +1,11 @@
-<div class="tasks-list__task" [ngClass]="{ 'tasks-list__task--completed' : task.status }">
-    <button class="tasks-list__status" (click)="onToggle()">
+<div class="todo-list-item__task" [ngClass]="{ 'todo-list-item__task--completed' : task.status }">
+    <button class="todo-list-item__status" (click)="onToggle()">
             <i class="far fa-check-circle" [ngClass]="{ fas : task.status }"></i>
     </button>
 
-    <p class="tasks-list__task-description">{{ task.description }}</p>
+    <p class="todo-list-item__task-description">{{ task.description }}</p>
 
-    <button class="tasks-list__btn" (click)="onRemove()">
+    <button class="todo-list-item__button" (click)="onRemove()">
             <i class="fas fa-trash-alt"></i>
     </button>
 </div>
