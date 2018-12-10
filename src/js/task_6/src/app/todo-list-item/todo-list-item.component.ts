@@ -10,9 +10,10 @@ import { Task } from '../shared/task';
 export class ToDoListItemComponent {
     @Input() task: Task;
     @Output() remove = new EventEmitter();
+    @Output() toggle = new EventEmitter();
 
-    toggleStatus():void {
-        this.task.status = !this.task.status;
+    onToggle():void {
+        this.toggle.emit(this.task);
     }
 
     onRemove():void {

@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Task }  from '../shared/task';
+import { Component, OnInit } from '@angular/core';
+import { Task } from '../shared/task';
 import { ToDoService } from '../shared/todo.service';
+
 @Component({
     selector: 'todo-list',
     styleUrls: ['./todo-list.component.scss'],
     templateUrl: './todo-list.component.html',
 })
 
-export class ToDoListComponent {
-    @Input() tasks: Task[];
+export class ToDoListComponent implements OnInit {
+    tasks: Task[];
 
     constructor(private todoService: ToDoService) {
         this.tasks = [];
@@ -19,10 +20,10 @@ export class ToDoListComponent {
     }
 
     remove(task: Task):void {
-        let index = this.tasks.indexOf(task);
+        this.todoService.removeTask(task);
+    }
 
-        if(index > -1) {
-            this.tasks.splice(index, 1);
-        }
+    toggle(task: Task):void {
+        this.todoService.toggleStatusTask(task);
     }
 }

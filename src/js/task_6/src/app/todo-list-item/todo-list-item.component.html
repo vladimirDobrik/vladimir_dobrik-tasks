@@ -1,5 +1,5 @@
 <div class="tasks-list__task" [ngClass]="{ 'tasks-list__task--completed' : task.status }">
-    <button class="tasks-list__status" (click)="toggleStatus()">
+    <button class="tasks-list__status" (click)="onToggle()">
             <i class="far fa-check-circle" [ngClass]="{ fas : task.status }"></i>
     </button>
 

@@ -2,5 +2,6 @@
     class="tasks-list"
     *ngFor="let task of tasks"
     [task]="task"
-    (remove)="remove($event)">
+    (remove)="remove($event)"
+    (toggle)="toggle($event)">
 </todo-list-item>
