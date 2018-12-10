@@ -26,6 +26,17 @@ export class ToDoService {
     }
 
     toggleStatusTask(task: Task):void {
+        let index = this.tasks.indexOf(task);
+        let completedTask = this.tasks.splice(index, 1);
+        
         task.status = !task.status;
+
+        let isCompleted = task.status;
+
+        if(isCompleted) {
+            this.tasks.unshift(completedTask[0]);
+        } else {
+            this.tasks.push(completedTask[0]);
+        }
     }
 }

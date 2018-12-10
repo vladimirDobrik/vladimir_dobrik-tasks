@@ -11,4 +11,12 @@ export const tasks = [
         "description": "Купить сахар",
         "status": false
     },
+    {
+        "description": "Оплатить счета",
+        "status": false
+    },
+    {
+        "description": "Навестить бабушку",
+        "status": false
+    }
 ]
