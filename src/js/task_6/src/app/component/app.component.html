@@ -1,1 +1,9 @@
-<todo-list class="app__todo-list todo-list"></todo-list>
+<main>
+    <todo-form (add)="addTask($event)"></todo-form>
+    <todo-list
+        class="app__todo-list todo-list"
+        [tasks]="tasks"
+        *ngIf="tasks.length">
+    </todo-list>
+</main>
+

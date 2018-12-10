@@ -1,12 +1,11 @@
-<div class="tasks-list__task"
-        *ngFor="let task of tasks; let index = index"
-        [ngClass]="{ 'tasks-list__task--completed' : task.status }">
+<div class="tasks-list__task" [ngClass]="{ 'tasks-list__task--completed' : task.status }">
+    <button class="tasks-list__status" (click)="toggleStatus()">
+            <i class="far fa-check-circle" [ngClass]="{ fas : task.status }"></i>
+    </button>
 
-        <button class="tasks-list__status" (click)="complete(task, index)">
-                <i class="far fa-check-circle" [ngClass]="{ fas : task.status }"></i>
-        </button>
-        <p class="tasks-list__task-description">{{ task.description }}</p>
-        <button class="tasks-list__btn" (click)="remove(index)">
-                <i class="fas fa-trash-alt"></i>
-        </button>
+    <p class="tasks-list__task-description">{{ task.description }}</p>
+
+    <button class="tasks-list__btn" (click)="onRemove()">
+            <i class="fas fa-trash-alt"></i>
+    </button>
 </div>

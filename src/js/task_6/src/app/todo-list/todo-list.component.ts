@@ -1,44 +1,28 @@
-import { Component } from '@angular/core';
-import { ITask } from './todo-list.interfaces';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Task }  from '../shared/task';
+import { ToDoService } from '../shared/todo.service';
 @Component({
     selector: 'todo-list',
     styleUrls: ['./todo-list.component.scss'],
     templateUrl: './todo-list.component.html',
 })
 
-export class ToDoList {
-    tasks: ITask[] = [
-        {
-            "description": "Купить хлеб",
-            "status": false
-        },
-        {
-            "description": "Купить молоко",
-            "status": false
-        },
-        {
-            "description": "Купить сахар",
-            "status": false
-        },
-        {
-            "description": "Вымыть посуду",
-            "status": false
-        },
-        {
-            "description": "Убраться в доме",
-            "status": false
-        }
-    ];
+export class ToDoListComponent {
+    @Input() tasks: Task[];
 
-    addTask(input: HTMLInputElement):void {
-        if(input.value.length) {
-            this.tasks.push({
-                "description": input.value,
-                "status": false
-            });
+    constructor(private todoService: ToDoService) {
+        this.tasks = [];
+    }
 
-            input.value = '';
+    ngOnInit() {
+        this.tasks = this.todoService.getTasks();
+    }
+
+    remove(task: Task):void {
+        let index = this.tasks.indexOf(task);
+
+        if(index > -1) {
+            this.tasks.splice(index, 1);
         }
     }
 }

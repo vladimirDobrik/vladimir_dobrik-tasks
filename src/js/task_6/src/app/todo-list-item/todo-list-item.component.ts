@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ITask } from '../todo-list/todo-list.interfaces';
+import { Task } from '../shared/task';
 
 @Component({
     selector: 'todo-list-item',
@@ -7,22 +7,15 @@ import { ITask } from '../todo-list/todo-list.interfaces';
     templateUrl: './todo-list-item.component.html'
 })
 
-export class ToDoListItem {
-    @Input() tasks: object[];
+export class ToDoListItemComponent {
+    @Input() task: Task;
+    @Output() remove = new EventEmitter();
 
-    public remove(index: number):void {
-        this.tasks.splice(index, 1);
+    toggleStatus():void {
+        this.task.status = !this.task.status;
     }
 
-    public complete(task: ITask, index: number):void {
-        let removedTask = this.tasks.splice(index, 1);
-
-        task.status = !task.status;
-
-        if(task.status) {
-            this.tasks.unshift(removedTask[0]);
-        } else {
-            this.tasks.push(removedTask[0]);
-        }
+    onRemove():void {
+        this.remove.emit(this.task);
     }
 }

@@ -1,0 +1,12 @@
+<form class="todo-list__header" (ngSubmit)="onSubmit(); taskForm.reset()" #taskForm="ngForm">
+    <label class="todo-list__label" for="task-description">New Task</label>
+    <input
+        class="todo-list__input"
+        type="text"
+        name="task-description"
+        [(ngModel)]="description"
+        required>
+    <button class="todo-list__btn" type="submit" [disabled]="taskForm.invalid">
+            <i class="fas fa-plus"></i>
+    </button>
+</form>

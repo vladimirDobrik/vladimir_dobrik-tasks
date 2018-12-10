@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Task } from '../shared/task';
+import { tasks } from '../shared/data';
 
 @Component({
     selector: 'custom-app',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+    tasks: Task[] = tasks;
+
+    addTask(description: string):void {
+        const task = new Task(description);
+
+        this.tasks.push(task);
+    }
 }
