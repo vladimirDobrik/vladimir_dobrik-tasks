@@ -12,9 +12,7 @@ export class ToDoService {
     }
 
     addTask(description: string):void {
-        let newTask = new Task(description);
-
-        this.tasks.push(newTask);
+        this.tasks.push(new Task(description));
     }
 
     removeTask(task: Task):void {
