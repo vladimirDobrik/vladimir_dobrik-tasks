@@ -29,17 +29,12 @@ export class ToDoService {
         
         task.status = !task.status;
 
-        let isCompleted = task.status;
         let indexOfFirstNotCompleted = this.tasks.findIndex(item => item.status === false);
 
         if(indexOfFirstNotCompleted === -1) {
             indexOfFirstNotCompleted = this.tasks.length;
         }
 
-        if(isCompleted) {
-            this.tasks.splice(indexOfFirstNotCompleted, 0, completedTask[0]);
-        } else {
-            this.tasks.push(completedTask[0]);
-        }
+        this.tasks.splice(indexOfFirstNotCompleted, 0, completedTask[0]);
     }
 }

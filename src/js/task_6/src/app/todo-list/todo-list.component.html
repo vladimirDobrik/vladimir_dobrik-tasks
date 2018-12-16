@@ -1,7 +1,8 @@
 <todo-list-item
     class="todo-list-item"
-    *ngFor="let task of tasks"
+    *ngFor="let task of tasks; let index = index"
     [task]="task"
+    [index]="index"
     (remove)="remove($event)"
     (toggle)="toggle($event)">
 </todo-list-item>

@@ -1,9 +1,15 @@
 <div class="todo-list-item__task" [ngClass]="{ 'todo-list-item__task--completed' : task.status }">
+    <div class="todo-list-item__counter">{{ index + 1 }}</div>
+
     <button class="todo-list-item__status" (click)="onToggle()">
             <i class="far fa-check-circle" [ngClass]="{ fas : task.status }"></i>
     </button>
 
-    <p class="todo-list-item__task-description">{{ task.description }}</p>
+    <input
+        class="todo-list-item__task-description"
+        type="text"
+        [(ngModel)]="task.description"
+        name="description">
 
     <button class="todo-list-item__button" (click)="onRemove()">
             <i class="fas fa-trash-alt"></i>

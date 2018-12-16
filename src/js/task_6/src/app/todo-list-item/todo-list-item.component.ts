@@ -9,8 +9,10 @@ import { Task } from '../shared/task';
 
 export class ToDoListItemComponent {
     @Input() task: Task;
+    @Input() index: number;
     @Output() remove = new EventEmitter();
     @Output() toggle = new EventEmitter();
+    @Output() change = new EventEmitter();
 
     onToggle():void {
         this.toggle.emit(this.task);
