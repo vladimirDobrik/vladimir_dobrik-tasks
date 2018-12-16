@@ -1,8 +1,11 @@
-<todo-list-item
-    class="todo-list-item"
-    *ngFor="let task of tasks; let index = index"
-    [task]="task"
-    [index]="index"
-    (remove)="remove($event)"
-    (toggle)="toggle($event)">
-</todo-list-item>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+    <todo-list-item
+        class="todo-list-item"
+        cdkDrag
+        *ngFor="let task of tasks; let index = index"
+        [task]="task"
+        [index]="index"
+        (remove)="remove($event)"
+        (toggle)="toggle($event)">
+    </todo-list-item>
+</div>

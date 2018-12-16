@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../shared/task';
 import { ToDoService } from '../shared/todo.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'todo-list',
@@ -25,5 +26,9 @@ export class ToDoListComponent implements OnInit {
 
     toggle(task: Task):void {
         this.todoService.toggleStatusTask(task);
+    }
+
+    drop(event: CdkDragDrop<Task[]>):void {
+        this.todoService.moveTask(event);
     }
 }

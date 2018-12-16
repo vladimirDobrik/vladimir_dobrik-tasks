@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from "./task";
 import { tasks } from "./data";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Injectable()
 
@@ -36,5 +37,9 @@ export class ToDoService {
         }
 
         this.tasks.splice(indexOfFirstNotCompleted, 0, completedTask[0]);
+    }
+
+    moveTask(event: CdkDragDrop<Task[]>):void {
+        moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
     }
 }
