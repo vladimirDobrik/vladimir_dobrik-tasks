@@ -16,3 +16,5 @@ task_3 - Календарь.
 task_4 - XMLHttpRequest и Promise.
 
 task_5 - Webpack
+
+task_6 - ToDo list
